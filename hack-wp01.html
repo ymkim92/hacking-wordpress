@@ -6,9 +6,9 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Hacking the WordPress &mdash; Hacking Wordpress 0.1 documentation</title>
+    <title>Introduction &mdash; Hacking Wordpress 0.1 documentation</title>
     
-    <link rel="stylesheet" href="static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="static/classic.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -38,63 +38,24 @@
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Hacking Wordpress 0.1 documentation</a> &raquo;</li> 
       </ul>
-    </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Hacking the WordPress</a><ul>
-<li><a class="reference internal" href="#preparing-a-target-with-docker">Preparing a target with docker</a></li>
-<li><a class="reference internal" href="#id-hacking">ID hacking</a><ul>
-<li><a class="reference internal" href="#attack-with-nmap">Attack with nmap</a></li>
-<li><a class="reference internal" href="#how-to-secure-your-wordpress-id-from-theft">How to secure your WordPress ID from theft</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">Hacking Wordpress</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="sources/hack-wp01.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="hacking-the-wordpress">
-<h1>Hacking the WordPress<a class="headerlink" href="#hacking-the-wordpress" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <p>WordPress is a free and open-source blogging tool and a content management system (CMS) based on PHP and MySQL [<a class="reference external" href="http://en.wikipedia.org/wiki/WordPress">wikipedia</a>].
 It is very popular because it is easy to use and deploy on the Internet. On the other hand, it has a lot of security threats.
 In this document, I would like to show you how the hacker steals the information from your WordPress website
 and attack it. Then, I want to suggest the way to pretect your system from the attack.</p>
 <p>To attack the system without permission is against law. So I installed the target testing system on docker in my laptop.
 It is very fast and easy to manage your testing WordPress website. You can take advantage of docker as well.</p>
+</div>
 <div class="section" id="preparing-a-target-with-docker">
-<h2>Preparing a target with docker<a class="headerlink" href="#preparing-a-target-with-docker" title="Permalink to this headline">¶</a></h2>
+<h1>Preparing a target with docker<a class="headerlink" href="#preparing-a-target-with-docker" title="Permalink to this headline">¶</a></h1>
 <p>I modified the docker WordPress image of <a class="reference external" href="https://github.com/tutumcloud/tutum-docker-wordpress">Tutum Cloud</a> a little
 to install the old version of WordPress.
 The old version has more vulneranability so it is not difficut to find weaknesses.
@@ -121,7 +82,7 @@ you may add the <code class="docutils literal"><span class="pre">WP_HOME</span><
 <p>You can study more about this in <a class="reference external" href="https://codex.wordpress.org/Changing_The_Site_URL">https://codex.wordpress.org/Changing_The_Site_URL</a>.</p>
 </div>
 <div class="section" id="id-hacking">
-<h2>ID hacking<a class="headerlink" href="#id-hacking" title="Permalink to this headline">¶</a></h2>
+<h1>ID hacking<a class="headerlink" href="#id-hacking" title="Permalink to this headline">¶</a></h1>
 <p>To see which ID is in the WordPress website,
 open the following URL but change the IP address with your own address or name:</p>
 <div class="highlight-python"><div class="highlight"><pre>http:://172.17.0.7/?author=1
@@ -138,7 +99,7 @@ I do not know why WordPress provide this functionality.</p>
 Tools such as wpscan, nmap and Burp Suite are available to do this [<a class="reference external" href="https://hackertarget.com/attacking-wordpress/">attacking-wordpress</a>].
 Here I will show you how to use nmap script for this attack.</p>
 <div class="section" id="attack-with-nmap">
-<h3>Attack with nmap<a class="headerlink" href="#attack-with-nmap" title="Permalink to this headline">¶</a></h3>
+<h2>Attack with nmap<a class="headerlink" href="#attack-with-nmap" title="Permalink to this headline">¶</a></h2>
 <p>The command <code class="docutils literal"><span class="pre">nmap</span> <span class="pre">-sV</span> <span class="pre">--script</span> <span class="pre">http-wordpress-enum</span> <span class="pre">--script-args</span> <span class="pre">limit=25</span> <span class="pre">&lt;target&gt;</span></code>
 shows user names as well as the open ports and its service/version info.
 Default limit is 100. If you specify <code class="docutils literal"><span class="pre">limit</span></code> argument as 25, only 25 user IDs is searched.</p>
@@ -184,7 +145,7 @@ Nmap done: 1 IP address (1 host up) scanned in 11.54 seconds
 </div>
 </div>
 <div class="section" id="how-to-secure-your-wordpress-id-from-theft">
-<h3>How to secure your WordPress ID from theft<a class="headerlink" href="#how-to-secure-your-wordpress-id-from-theft" title="Permalink to this headline">¶</a></h3>
+<h2>How to secure your WordPress ID from theft<a class="headerlink" href="#how-to-secure-your-wordpress-id-from-theft" title="Permalink to this headline">¶</a></h2>
 <p>There are several ways to protect your ID:</p>
 <ul class="simple">
 <li>modify WordPress source code</li>
@@ -212,10 +173,47 @@ if you don&#8217;t set up <code class="docutils literal"><span class="pre">Displ
 </div>
 </div>
 </div>
-</div>
 
 
           </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction</a></li>
+<li><a class="reference internal" href="#preparing-a-target-with-docker">Preparing a target with docker</a></li>
+<li><a class="reference internal" href="#id-hacking">ID hacking</a><ul>
+<li><a class="reference internal" href="#attack-with-nmap">Attack with nmap</a></li>
+<li><a class="reference internal" href="#how-to-secure-your-wordpress-id-from-theft">How to secure your WordPress ID from theft</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Hacking Wordpress</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="sources/hack-wp01.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>

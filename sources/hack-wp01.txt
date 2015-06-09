@@ -1,4 +1,4 @@
-Hacking the WordPress
+Introduction
 ==========================
 
 WordPress is a free and open-source blogging tool and a content management system (CMS) based on PHP and MySQL [`wikipedia <http://en.wikipedia.org/wiki/WordPress>`_].
@@ -10,7 +10,7 @@ To attack the system without permission is against law. So I installed the targe
 It is very fast and easy to manage your testing WordPress website. You can take advantage of docker as well.
 
 Preparing a target with docker
----------------------------------
+========================================
 
 I modified the docker WordPress image of `Tutum Cloud <https://github.com/tutumcloud/tutum-docker-wordpress>`_ a little
 to install the old version of WordPress.
@@ -39,7 +39,7 @@ You can study more about this in https://codex.wordpress.org/Changing_The_Site_U
 
 
 ID hacking
--------------
+========================================
 
 To see which ID is in the WordPress website, 
 open the following URL but change the IP address with your own address or name: ::
@@ -59,7 +59,7 @@ Tools such as wpscan, nmap and Burp Suite are available to do this [`attacking-w
 Here I will show you how to use nmap script for this attack.
 
 Attack with nmap
-^^^^^^^^^^^^^^^^^^^^^
+------------------------
 
 The command ``nmap -sV --script http-wordpress-enum --script-args limit=25 <target>`` 
 shows user names as well as the open ports and its service/version info.
@@ -109,7 +109,7 @@ The file of ``500-worst-passwords.txt`` used below is from `Skull Security <http
     Nmap done: 1 IP address (1 host up) scanned in 11.54 seconds
 
 How to secure your WordPress ID from theft
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------------------------
 
 There are several ways to protect your ID:
 
