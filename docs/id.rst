@@ -1,45 +1,5 @@
-Hacking the WordPress
-==========================
-
-WordPress is a free and open-source blogging tool and a content management system (CMS) based on PHP and MySQL [`wikipedia <http://en.wikipedia.org/wiki/WordPress>`_].
-It is very popular because it is easy to use and deploy on the Internet. On the other hand, it has a lot of security threats.
-In this document, I would like to show you how the hacker steals the information from your WordPress website 
-and attack it. Then, I want to suggest the way to pretect your system from the attack.
-
-To attack the system without permission is against law. So I installed the target testing system on docker in my laptop.
-It is very fast and easy to manage your testing WordPress website. You can take advantage of docker as well.
-
-Preparing a target with docker
----------------------------------
-
-I modified the docker WordPress image of `Tutum Cloud <https://github.com/tutumcloud/tutum-docker-wordpress>`_ a little
-to install the old version of WordPress.
-The old version has more vulneranability so it is not difficut to find weaknesses.
-I tested the version of 1.2.1 and 4.2 and both are working well.
-You should refer `here <https://github.com/ymkim92/tutum-docker-wordpress>`_ to install the old version.
-
-Sometimes the new start of container changes its IP address for example, from 172.17.0.7 to 172.17.0.8.
-
-.. note:: To start and attach your ready-made instance, you can run this command: ::
-    
-      $ sudo docker start -a <CONTAINER ID>
-      
-      For exameple, ::
-
-        $ sudo docker start -a e98a5273f9bf
-
-At this time, if you want to keep working with your wordpress site,
-you may add the ``WP_HOME`` and ``WP_SITEURL`` variables in ``wp-config.php``: ::
-
-    define('WP_HOME','http://172.17.0.8');
-    define('WP_SITEURL','http://172.17.0.8');
-
-You can study more about this in https://codex.wordpress.org/Changing_The_Site_URL.
-
-
-
 ID hacking
--------------
+==============
 
 To see which ID is in the WordPress website, 
 open the following URL but change the IP address with your own address or name: ::
@@ -59,7 +19,7 @@ Tools such as wpscan, nmap and Burp Suite are available to do this [`attacking-w
 Here I will show you how to use nmap script for this attack.
 
 Attack with nmap
-^^^^^^^^^^^^^^^^^^^^^
+-------------------
 
 The command ``nmap -sV --script http-wordpress-enum --script-args limit=25 <target>`` 
 shows user names as well as the open ports and its service/version info.
@@ -109,7 +69,7 @@ The file of ``500-worst-passwords.txt`` used below is from `Skull Security <http
     Nmap done: 1 IP address (1 host up) scanned in 11.54 seconds
 
 How to secure your WordPress ID from theft
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------------------
 
 There are several ways to protect your ID:
 
